@@ -4,10 +4,21 @@ from typing import Union
 import numpy as np
 from fastapi import FastAPI, UploadFile
 from PIL import Image
+from fastapi.middleware.cors import CORSMiddleware
 
 from bestmlops.model import classify_digit
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "*"
+    ],  # allow all origins (in real life you should specify the frontend URL)
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 # you can get rid of the two original endpoints if you want
